@@ -22,7 +22,7 @@ public class ProducerCallback {
             ProducerRecord record = new ProducerRecord<>("first", i + "--test");
             producer.send(record, (metadata, exception) -> {
                 if (exception == null) {
-                    System.out.println("topic :" + metadata.topic() + "partition: " + metadata.partition());
+                    System.out.println("topic :" + metadata.topic() + " partition: " + metadata.partition());
                 }
             });
         }
