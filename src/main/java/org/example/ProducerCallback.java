@@ -7,7 +7,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 
-public class Main {
+public class ProducerCallback {
     public static void main(String[] args) {
 
         // 0
@@ -20,7 +20,11 @@ public class Main {
 
         for (int i = 0; i < 3; i++) {
             ProducerRecord record = new ProducerRecord<>("first", i + "--test");
-            producer.send(record);
+            producer.send(record, (metadata, exception) -> {
+                if (exception == null) {
+                    System.out.println("topic :" + metadata.topic() + "partition: " + metadata.partition());
+                }
+            });
         }
 
         producer.close();
