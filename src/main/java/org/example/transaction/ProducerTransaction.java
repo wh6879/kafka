@@ -17,19 +17,20 @@ public class ProducerTransaction {
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
+        properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "tranaction_id_01");// 1
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 
-        producer.initTransactions();
-        producer.beginTransaction();
+        producer.initTransactions();// 2
+        producer.beginTransaction();// 3
 
         try {
             for (int i = 0; i < 3; i++) {
                 ProducerRecord record = new ProducerRecord<>("first", i + "--test");
                 producer.send(record);
             }
-            producer.commitTransaction();
+            producer.commitTransaction();// 4
         } catch (Exception e) {
-            producer.abortTransaction();
+            producer.abortTransaction();// 5
         } finally {
             producer.close();
         }
