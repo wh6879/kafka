@@ -1,4 +1,4 @@
-package org.example.parameters;
+package org.example.ack;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -8,7 +8,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 
-public class ProducerParam {
+public class ProducerACK {
     public static void main(String[] args) {
 
         // 0
@@ -24,6 +24,11 @@ public class ProducerParam {
         // 压缩 gzip\snappy\lz4\zstd
         properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, CompressionType.SNAPPY.name);
         properties.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33554432);// 缓冲区大小64M
+
+        //ack
+        properties.put(ProducerConfig.ACKS_CONFIG, "1");
+        //ACK-RETRY
+        properties.put(ProducerConfig.RETRIES_CONFIG, 3);
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 
