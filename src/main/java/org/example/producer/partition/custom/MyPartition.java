@@ -1,4 +1,4 @@
-package org.example.partition.custom;
+package org.example.producer.partition.custom;
 
 import org.apache.kafka.clients.producer.Partitioner;
 import org.apache.kafka.common.Cluster;

@@ -1,4 +1,4 @@
-package org.example.partition.custom;
+package org.example.producer.partition.custom;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;

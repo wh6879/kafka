@@ -1,4 +1,4 @@
-package org.example;
+package org.example.producer;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -6,10 +6,9 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 
-public class ProducerSync {
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+public class Producer {
+    public static void main(String[] args) {
 
         // 0
         Properties properties = new Properties();
@@ -21,7 +20,7 @@ public class ProducerSync {
 
         for (int i = 0; i < 3; i++) {
             ProducerRecord record = new ProducerRecord<>("first", i + "--test");
-            producer.send(record).get();
+            producer.send(record);
         }
 
         producer.close();

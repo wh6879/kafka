@@ -1,4 +1,4 @@
-package org.example;
+package org.example.producer.partition;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -7,7 +7,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 
-public class Producer {
+public class ProducerCallbackPartKey {
     public static void main(String[] args) {
 
         // 0
@@ -19,8 +19,12 @@ public class Producer {
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 
         for (int i = 0; i < 3; i++) {
-            ProducerRecord record = new ProducerRecord<>("first", i + "--test");
-            producer.send(record);
+            ProducerRecord record = new ProducerRecord<>("first","f", i + "--test");
+            producer.send(record, (metadata, exception) -> {
+                if (exception == null) {
+                    System.out.println("topic :" + metadata.topic() + " partition: " + metadata.partition());
+                }
+            });
         }
 
         producer.close();
