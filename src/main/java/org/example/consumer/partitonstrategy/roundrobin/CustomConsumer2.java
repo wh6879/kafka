@@ -25,7 +25,7 @@ public class CustomConsumer2 {
 
         // 消费者分区分配策略
         properties.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG,
-                "org.apache.kafka.clients.consumer.RoundRobinAssignor");
+                "org.apache.kafka.clients.consumer.StickyAssignor");
 
         // groupid
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "GroupId2");

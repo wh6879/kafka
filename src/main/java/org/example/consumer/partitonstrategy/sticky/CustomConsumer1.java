@@ -1,4 +1,4 @@
-package org.example.consumer.partitonstrategy.roundrobin;
+package org.example.consumer.partitonstrategy.sticky;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class CustomConsumer3 {
+public class CustomConsumer1 {
 
     public static void main(String[] args) {
         // 0 配置
@@ -25,7 +25,7 @@ public class CustomConsumer3 {
 
         // 消费者分区分配策略
         properties.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG,
-                "org.apache.kafka.clients.consumer.StickyAssignor");
+                "org.apache.kafka.clients.consumer.RoundRobinAssignor");
 
         // groupid
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "GroupId2");
