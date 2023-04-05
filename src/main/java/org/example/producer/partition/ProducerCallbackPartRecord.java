@@ -12,14 +12,14 @@ public class ProducerCallbackPartRecord {
 
         // 0
         Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.96.131:9092");
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.96.137:9092");
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 
         for (int i = 0; i < 3; i++) {
-            ProducerRecord record = new ProducerRecord<>("first", 2, "", i + "--test");
+            ProducerRecord record = new ProducerRecord<>("first", 0, "", i + "--test");
             producer.send(record, (metadata, exception) -> {
                 if (exception == null) {
                     System.out.println("topic :" + metadata.topic() + " partition: " + metadata.partition());
